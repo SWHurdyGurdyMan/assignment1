@@ -6,7 +6,7 @@ package com.meritamerica.assignment1;
 public class MeritAmericaBankApp {
 	public static void main(String[] args) {
 		
-		//Dore
+		//Create new object of AccountHolder Class, DoreM
 		AccountHolder DoreM = new AccountHolder(
 				"Dore",
 				"",
@@ -14,9 +14,13 @@ public class MeritAmericaBankApp {
 				"999999999",
 				100.0,
 				1000.0);
+		//Prints AccountHolder info as String
 		System.out.println(DoreM.toString());
+		//passes checking account balance and if deposit > 0 it is added to balance
 		DoreM.getCheckingAccount().deposit(500);
+		//passes savings balance and if withdrawal > 0 && withdrawal <= balance withdraws properly
 		DoreM.getSavingsAccount().withdraw(800);
+		//prints savings and checking info as String using toString in those classes
 		System.out.println(DoreM.getCheckingAccount().toString());
 		System.out.println(DoreM.getSavingsAccount().toString());
 		

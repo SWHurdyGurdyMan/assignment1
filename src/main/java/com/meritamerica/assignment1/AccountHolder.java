@@ -1,61 +1,78 @@
-//Authors: Shelby Walles and Dore Mendoza
 package com.meritamerica.assignment1;
 
+import java.text.DecimalFormat;
+
 public class AccountHolder {
-	public AccountHolder(String firstName, String middleName, String lastName, 
-			String ssn, double checkingAccountOpeningBalance, double savingsAccountOpeningBalance){
-		System.out.println("Name: " + firstName + " " + middleName + " " + lastName );
-		System.out.println("SSN: " + ssn);
-		System.out.println("Checking Account Balance: " + checkingAccountOpeningBalance);
-		System.out.println("Checking Account Interest Rate: 0.0001");
-		System.out.println("Checking Account Balance in 3 years: " + checkingAccountOpeningBalance);
-		System.out.println("Savings Account Balance: " + savingsAccountOpeningBalance);
-		System.out.println("Savings Account Interest Rate: 0.01");
-		System.out.println("Savings Account Balance in 3 years: " + savingsAccountOpeningBalance);
+	
+	private String firstName;
+	private String middleName;
+	private String lastName;
+	private String ssn;
+	private CheckingAccount checkingAccount = null;
+	private SavingsAccount savingsAccount = null;
+	
+	//blueprint for an AccountHolder's info, works when an object of the AccountHolder class is created
+	public AccountHolder(String firstName, String middleName, String lastName, String ssn,
+					double checkingAccountOpeningBalance, double savingsAccountOpeningBalance) {
+		this.firstName = firstName;
+		this.middleName = middleName;
+		this.lastName = lastName;
+		this.ssn = ssn;
+		this.checkingAccount = new CheckingAccount(checkingAccountOpeningBalance,0);
+		this.savingsAccount = new SavingsAccount(savingsAccountOpeningBalance,0);
 	}
-	public static void main(String[] args) {
-	}
-	//returns current firstName
+	
 	public String getFirstName() {
 		return firstName;
 	}
-	//sets String firstName to a new first name, calls firstName AccountHolder constructor
+	
 	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
-	//returns current middleName
+	
 	public String getMiddleName() {
 		return middleName;
 	}
-	//sets String firstName to a new middle name, calls middleName AccountHolder constructor
+	
 	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
 	}
-	//returns current lastName
+	
 	public String getLastName() {
 		return lastName;
 	}
-	//sets String firstName to a new middle name, calls middleName AccountHolder constructor
+	
 	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
+	
 	public String getSSN() {
 		return ssn;
 	}
-	//sets String firstName to a new middle name, calls middleName AccountHolder constructor
-	public void setSNN(String snn) {
+	
+	public void setSSN(String ssn) {
+		this.ssn = ssn;
 	}
-	public CheckingAccount getCheckingAccount() {		
-		return checkingaccountBalance;
+	
+	public CheckingAccount getCheckingAccount() {
+		return checkingAccount;
 	}
+	
 	public SavingsAccount getSavingsAccount() {
-		return savingsaccountBalance;
+		return savingsAccount;
 	}
-	public String toString(){
-		return string;
+	
+	@Override
+	public String toString() {
+		DecimalFormat df = new DecimalFormat("0.##");
+		return "Name: " + firstName + " " + middleName + " " + lastName +
+				"\n SSN: " + ssn +
+				"\n Checking Account Balance: $" + df.format(checkingAccount.getBalance()) +
+				"\n Checking Account Interest Rate: " + checkingAccount.getInterestRate() +
+				"\n Checking Account Balance in 3 years: $" + df.format(checkingAccount.futureValue(3)) +
+				"\n Savings Account Balance : $" + df.format(savingsAccount.getBalance()) +
+				"\n Savings Account Interest Rate: " + savingsAccount.getInterestRate() +
+				"\n Savings Account Balance in 3 years: $" + df.format(savingsAccount.futureValue(3));
+		
 	}
-	//establishes Instance Variables
-	private static String firstName;
-	private static String middleName;
-	private static String lastName;
-	private static String ssn;
-	private static double checkingAccountOpeningBalance;
-	private static double savingsAccountOpeningBalance;
 }
